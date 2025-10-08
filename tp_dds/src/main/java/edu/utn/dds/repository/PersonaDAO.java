@@ -7,4 +7,7 @@ public interface PersonaDAO {
     public void modificarHuesped(Long id);
     public void borrarHuesped(Long id);
     public void buscarHuesped(Long id);
+    public void buscarHuespedPorNombre(String nombre);
+    public void buscarHuespedPorApellido(String apellido);
+    public void buscarHuespedPorDni(String dni);
 }

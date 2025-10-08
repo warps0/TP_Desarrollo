@@ -7,7 +7,7 @@ public abstract class Persona {
     private String pos_f_iva;
     private String nacionalidad;
     private String ocupacion;
-    private LocalDate DoB;
+    private LocalDate doB;
     private Contacto contacto;
     
     public Long getId() {
@@ -35,10 +35,10 @@ public abstract class Persona {
         this.ocupacion = ocupacion;
     }
     public LocalDate getDoB() {
-        return DoB;
+        return doB;
     }
-    public void setDoB(LocalDate doB) {
-        DoB = doB;
+    public void setDoB(LocalDate fecha) {
+        this.doB = fecha;
     }
     public Contacto getContacto() {
         return contacto;
