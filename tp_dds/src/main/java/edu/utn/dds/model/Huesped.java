@@ -45,6 +45,4 @@ public class Huesped extends Persona {
     public void setTipo_dni(String tipo_dni) {
         this.tipo_dni = tipo_dni;
     }
-
-    
 }

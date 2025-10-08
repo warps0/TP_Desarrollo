@@ -1,32 +1,35 @@
 package edu.utn.dds.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Contacto {
-    // TODO: Ver si conviene trabajar con una lista de telefonos/emails o con una lista de contactos
-    
-    private Integer telefono;
-    private String email;
+    private List<Integer> telefono;
+    private List<String> email;
     private String direccion;
     
     public Contacto(Integer telefono, String email, String direccion) {
-        this.telefono = telefono;
-        this.email = email;
+        this.telefono = new ArrayList<>();
+        this.email = new ArrayList<>();
+        this.telefono.add(telefono);
+        this.email.add(email);
         this.direccion = direccion;
     }
 
-    public Integer getTelefono() {
+    public List<Integer> getTelefono() {
         return telefono;
     }
 
     public void setTelefono(Integer telefono) {
-        this.telefono = telefono;
+        this.telefono.add(telefono);
     }
 
-    public String getEmail() {
+    public List<String> getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email.add(email);
     }
 
     public String getDireccion() {

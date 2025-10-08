@@ -45,5 +45,6 @@ public abstract class Persona {
     }
     public void setContacto(Contacto contacto) {
         this.contacto = contacto;
-    }   
+    }
+    
 }
