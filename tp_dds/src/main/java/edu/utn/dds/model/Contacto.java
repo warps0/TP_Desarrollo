@@ -1,35 +1,33 @@
 package edu.utn.dds.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Contacto {
-    private List<Integer> telefono;
-    private List<String> email;
+    // TODO: tratar telefono/email como colecciones
+    private String telefono;
+    private String email;
     private String direccion;
     
-    public Contacto(Integer telefono, String email, String direccion) {
-        this.telefono = new ArrayList<>();
-        this.email = new ArrayList<>();
-        this.telefono.add(telefono);
-        this.email.add(email);
+    public Contacto(){};
+
+    public Contacto(String telefono, String email, String direccion) {
+        this.telefono = telefono;
+        this.email = email;
         this.direccion = direccion;
     }
 
-    public List<Integer> getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
-        this.telefono.add(telefono);
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    public List<String> getEmail() {
+    public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
-        this.email.add(email);
+        this.email = email;
     }
 
     public String getDireccion() {

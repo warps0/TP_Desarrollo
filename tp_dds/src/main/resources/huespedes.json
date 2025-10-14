@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1001,
+    "pos_f_iva": "Responsable Inscripto",
+    "nacionalidad": "Argentina",
+    "ocupacion": "Estudiante",
+    "doB": "2000-05-15",
+    "contacto": {
+      "telefono": "+549115550001",
+      "email": "juan.perez@example.com",
+      "direccion": "Av. Corrientes 1500, CABA"
+    },
+    "dni": "39123456",
+    "nombre": "Juan",
+    "apellido": "Perez",
+    "tipo_dni": "DNI"
+  },
+  {
+    "id": 1002,
+    "pos_f_iva": "Consumidor Final",
+    "nacionalidad": "Chilena",
+    "ocupacion": "Ingeniero",
+    "doB": "1995-11-20",
+    "contacto": {
+      "telefono": "+56987654321",
+      "email": "ana.gomez@example.com",
+      "direccion": "Calle Los Andes 45, Santiago"
+    },
+    "dni": "CL12345678",
+    "nombre": "Ana",
+    "apellido": "Gomez",
+    "tipo_dni": "Pasaporte"
+  },
+  {
+    "id": 1003,
+    "pos_f_iva": "Exento",
+    "nacionalidad": "Brasileña",
+    "ocupacion": "Médico",
+    "doB": "1988-01-08",
+    "contacto": {
+      "telefono": "+5511999887766",
+      "email": "carlos.silva@example.com",
+      "direccion": "Rua Augusta 100, São Paulo"
+    },
+    "dni": "BR98765432",
+    "nombre": "Carlos",
+    "apellido": "Silva",
+    "tipo_dni": "RG"
+  },
+  {
+    "id": 1004,
+    "pos_f_iva": "Monotributista",
+    "nacionalidad": "Uruguaya",
+    "ocupacion": "Diseñador",
+    "doB": "1998-07-25",
+    "contacto": {
+      "telefono": "+59891234567",
+      "email": "mariana.rojas@example.com",
+      "direccion": "Bv. Artigas 50, Montevideo"
+    },
+    "dni": "UY45678901",
+    "nombre": "Mariana",
+    "apellido": "Rojas",
+    "tipo_dni": "Cédula"
+  },
+  {
+    "id": 1005,
+    "pos_f_iva": "Consumidor Final",
+    "nacionalidad": "Paraguaya",
+    "ocupacion": "Abogado",
+    "doB": "1975-03-10",
+    "contacto": {
+      "telefono": "+595981112233",
+      "email": "rodrigo.fleitas@example.com",
+      "direccion": "Av. España 345, Asunción"
+    },
+    "dni": "PY11223344",
+    "nombre": "Rodrigo",
+    "apellido": "Fleitas",
+    "tipo_dni": "Cédula"
+  },
+  {
+    "id": 1006,
+    "pos_f_iva": "Responsable Inscripto",
+    "nacionalidad": "Mexicana",
+    "ocupacion": "Programador",
+    "doB": "1992-09-01",
+    "contacto": {
+      "telefono": "+525512345678",
+      "email": "sofia.lopez@example.com",
+      "direccion": "Calle Reforma 22, CDMX"
+    },
+    "dni": "MX33445566",
+    "nombre": "Sofía",
+    "apellido": "López",
+    "tipo_dni": "Pasaporte"
+  },
+  {
+    "id": 1007,
+    "pos_f_iva": "Consumidor Final",
+    "nacionalidad": "Peruana",
+    "ocupacion": "Chef",
+    "doB": "1985-12-12",
+    "contacto": {
+      "telefono": "+51999887766",
+      "email": "javier.ramos@example.com",
+      "direccion": "Av. Arequipa 120, Lima"
+    },
+    "dni": "PE77889900",
+    "nombre": "Javier",
+    "apellido": "Ramos",
+    "tipo_dni": "DNI"
+  },
+  {
+    "id": 1008,
+    "pos_f_iva": "Monotributista",
+    "nacionalidad": "Colombiana",
+    "ocupacion": "Vendedor",
+    "doB": "2001-04-30",
+    "contacto": {
+      "telefono": "+573101234567",
+      "email": "luisa.castro@example.com",
+      "direccion": "Carrera 7, Bogotá"
+    },
+    "dni": "CO10203040",
+    "nombre": "Luisa",
+    "apellido": "Castro",
+    "tipo_dni": "Cédula"
+  },
+  {
+    "id": 1009,
+    "pos_f_iva": "Consumidor Final",
+    "nacionalidad": "Española",
+    "ocupacion": "Jubilado",
+    "doB": "1960-06-03",
+    "contacto": {
+      "telefono": "+34600112233",
+      "email": "antonio.garrido@example.com",
+      "direccion": "Rambla Catalunya 5, Barcelona"
+    },
+    "dni": "ES56789012A",
+    "nombre": "Antonio",
+    "apellido": "Garrido",
+    "tipo_dni": "NIE"
+  },
+  {
+    "id": 1010,
+    "pos_f_iva": "Responsable Inscripto",
+    "nacionalidad": "Canadiense",
+    "ocupacion": "Analista",
+    "doB": "1990-10-22",
+    "contacto": {
+      "telefono": "+15147788990",
+      "email": "emily.white@example.com",
+      "direccion": "Rue Saint-Jacques 10, Montreal"
+    },
+    "dni": "CA99887766",
+    "nombre": "Emily",
+    "apellido": "White",
+    "tipo_dni": "Pasaporte"
+  }
+]

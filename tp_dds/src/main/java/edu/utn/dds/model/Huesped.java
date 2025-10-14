@@ -6,6 +6,8 @@ public class Huesped extends Persona {
     private String apellido;
     private String tipo_dni;
     
+    public Huesped(){};
+
     public Huesped(String dni, String nombre, String apellido, String tipo_dni, String nacionalidad) {
         this.dni = dni;
         this.nombre = nombre;
