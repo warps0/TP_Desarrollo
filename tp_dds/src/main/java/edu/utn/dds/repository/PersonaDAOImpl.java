@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +18,7 @@ public final class PersonaDAOImpl implements PersonaDAO {
 
     private ObjectMapper mapper;
 
-    String currentDirectory = System.getProperty("user.dir");
+    private String currentDirectory = System.getProperty("user.dir");
 
     private File jsonFile = new File(currentDirectory + "\\tp_dds\\src\\main\\resources\\huespedes.json");
     
@@ -26,7 +27,7 @@ public final class PersonaDAOImpl implements PersonaDAO {
         mapper.registerModule(new JavaTimeModule());
     }
 
-    public synchronized static PersonaDAOImpl getPersonaDAOInstance() {
+    public synchronized static PersonaDAO getPersonaDAOInstance() {
         if(SINGLETON_INSTANCE == null) {
             SINGLETON_INSTANCE = new PersonaDAOImpl();
         }
@@ -35,50 +36,65 @@ public final class PersonaDAOImpl implements PersonaDAO {
     }
 
     @Override
-    public Persona crearHuesped() {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'crearHuesped'");
-        this.getDataFromJson(mapper, jsonFile);
+    public Persona crearHuesped(String dni, String nombre, String apellido, String tipo_dni, String nacionalidad) {
+        Huesped huesped = new Huesped(dni, nombre, apellido, tipo_dni, nacionalidad);
+        List<Huesped> listaHuespedes = this.getDataFromJson();
+        listaHuespedes.add(huesped);
 
-        return null;
+        this.setDataToJson(listaHuespedes);
+
+        return huesped;
     }
 
     @Override
-    public void modificarHuesped(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'modificarHuesped'");
+    public void modificarHuesped(Long id, String dni, String nombre, String apellido, String tipo_dni, String nacionalidad) {
+        Huesped huespedAModificar = buscarHuesped(id);
+
+        if(dni != null) huespedAModificar.setDni(dni);
+        if(nombre != null) huespedAModificar.setNombre(nombre);
+        if(apellido != null) huespedAModificar.setApellido(apellido);
+        if(tipo_dni != null) huespedAModificar.setTipo_dni(tipo_dni);
+        if(nacionalidad != null) huespedAModificar.setNacionalidad(nacionalidad);
+
+        borrarHuesped(id);
+
+        List<Huesped> listaHuespedes = getDataFromJson();
+        listaHuespedes.add(huespedAModificar);
+
+        setDataToJson(listaHuespedes);
     }
 
     @Override
     public void borrarHuesped(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'borrarHuesped'");
+        Huesped huesped = this.buscarHuesped(id);
+        List<Huesped> huespedes = this.getDataFromJson();
+        huespedes.remove(huesped);
+        this.setDataToJson(huespedes);
+        System.out.println("Huesped Eliminado exitosamente.");
     }
 
     @Override
-    public void buscarHuesped(Long id) {
-        // TODO Auto-generated method stub
-        List<Huesped> huespedes = this.getDataFromJson(mapper, jsonFile);
+    public Huesped buscarHuesped(Long id) {
+        List<Huesped> huespedes = this.getDataFromJson();
         Huesped found = null;
         for (Huesped h : huespedes) {
             if(h.getId().equals(id)){
               found = h;  
               System.out.println("Huesped encontrado: " + h.getNombre() + " " + h.getApellido());
-              break;
               } 
         }
         if (found == null) {
             System.out.println("No se encontro ningun huesped con el ID: " + id);
+            //throw new HuespedNoEncontradoException()
         } else {
           System.out.println(found);
         }
-        //throw new UnsupportedOperationException("Unimplemented method 'buscarHuesped'");
+        return found;
     }
 
     @Override
-    public void buscarHuespedPorNombre(String nombre) {
-        // TODO Auto-generated method stub
-        List<Huesped> huespedes = this.getDataFromJson(mapper, jsonFile);
+    public List<Huesped> buscarHuespedPorNombre(String nombre) {
+        List<Huesped> huespedes = this.getDataFromJson();
         List<Huesped> foundList = new ArrayList<>();
         for (Huesped h : huespedes) {
             if(h.getNombre().equalsIgnoreCase(nombre)){
@@ -93,13 +109,11 @@ public final class PersonaDAOImpl implements PersonaDAO {
             System.out.println(h.getId() + " " + h.getNombre() + " " + h.getApellido());
           }
         }
-        //throw new UnsupportedOperationException("Unimplemented method 'buscarHuespedPorNombre'");
     }
 
     @Override
-    public void buscarHuespedPorApellido(String apellido) {
-        // TODO Auto-generated method stub
-        List<Huesped> huespedes = this.getDataFromJson(mapper, jsonFile);
+    public List<Huesped> buscarHuespedPorApellido(String apellido) {
+        List<Huesped> huespedes = this.getDataFromJson();
         List<Huesped> foundList = new ArrayList<>();
         for (Huesped h : huespedes) {
             if(h.getApellido().equalsIgnoreCase(apellido)){
@@ -114,44 +128,69 @@ public final class PersonaDAOImpl implements PersonaDAO {
             System.out.println(h.getId() + " " + h.getNombre() + " " + h.getApellido());
           }
         }
-        //throw new UnsupportedOperationException("Unimplemented method 'buscarHuespedPorApellido'");
     }
 
     @Override
-    public void buscarHuespedPorDni(String dni) {
-        // TODO Auto-generated method stub
+    public Huesped buscarHuespedPorDni(String dni) {
         Huesped found = null;
-        List<Huesped> huespedes = this.getDataFromJson(mapper, jsonFile);
+        List<Huesped> huespedes = this.getDataFromJson();
         for (Huesped h : huespedes) {
             if(h.getDni().equals(dni)){
-              found = h;  
-              //System.out.println("Huesped encontrado: " + h.getNombre() + " " + h.getApellido());
-              break;
-              } 
+                found = h;  
+                //System.out.println("Huesped encontrado: " + h.getNombre() + " " + h.getApellido());
+                break;
+            } 
         }
         if (found == null) {
             System.out.println("No se encontro ningun huesped con el DNI: " + dni);
         } else {
-          System.out.println("Huesped encontrado: " + found.getNombre() + " " + found.getApellido());
+            System.out.println("Huesped encontrado: " + found.getNombre() + " " + found.getApellido());
         }
-       //throw new UnsupportedOperationException("Unimplemented method 'buscarHuespedPorDni'");
+        return found;
     }
     
-    public List<Huesped> getDataFromJson(ObjectMapper mapper, File file){
-      List<Huesped> huespedes = new ArrayList<>();
+    @Override
+    public List<Huesped> pruebaLambda(Long id, String dni, String nombre, String apellido){
+        List<Huesped> listaHuespedes = getDataFromJson();
+        List<Huesped> listaResultado = new ArrayList<>();
+
+        listaResultado = listaHuespedes.stream().filter(p -> p.getId().equals(id)).collect(Collectors.toList());
+        
+        if(dni != null){
+          listaResultado = listaResultado.stream().filter(p -> p.getDni().equals(dni)).collect(Collectors.toList());
+        }
+        if(nombre != null){
+          listaResultado = listaResultado.stream().filter(p -> p.getNombre().equals(nombre)).collect(Collectors.toList());
+        }
+        if(apellido != null){
+          listaResultado = listaResultado.stream().filter(p -> p.getApellido().equals(apellido)).collect(Collectors.toList());
+        }
+
+      return listaResultado;
+    }
+
+    // File handler
+    private void setDataToJson(List<Huesped> huespedes) {
+        try {
+            mapper.writeValue(jsonFile ,huespedes);
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+            e.getMessage();  
+        }
+    }
+
+    private List<Huesped> getDataFromJson(){
+        List<Huesped> huespedes = new ArrayList<>();
 
         try{
-            huespedes = mapper.readValue(file, new TypeReference<List<Huesped>>(){});
-
-            //System.out.println("Total users read: " + huespedes.size());
-            // for (Huesped u : huespedes) {
-            //     System.out.println(u.getNacionalidad());
-            // }
+            mapper.readValue(jsonFile, new TypeReference<List<Huesped>>(){});
         }
         catch(IOException e){
             e.printStackTrace();
             e.getMessage();   
         }
-      return huespedes;
+        
+        return huespedes;
     }
 }
