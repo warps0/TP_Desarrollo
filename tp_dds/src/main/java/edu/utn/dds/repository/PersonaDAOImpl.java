@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -54,7 +55,7 @@ public final class PersonaDAOImpl implements PersonaDAO {
 
     @Override
     public Huesped modificarHuesped(Long id, String dni, String nombre, String apellido, String tipo_dni, String nacionalidad) {
-        Huesped huespedAModificar = buscarHuesped(id, null, null, null).getFirst();
+        Huesped huespedAModificar = buscarHuesped(id, null, null, null, null).getFirst();
 
         if(dni != null) huespedAModificar.setDni(dni);
         if(nombre != null) huespedAModificar.setNombre(nombre);
@@ -74,7 +75,7 @@ public final class PersonaDAOImpl implements PersonaDAO {
 
     @Override
     public Huesped borrarHuesped(Long id) {
-        Huesped huesped = this.buscarHuesped(id, null, null, null).getFirst();
+        Huesped huesped = this.buscarHuesped(id, null, null, null, null).getFirst();
         
         if(huesped != null) {
             List<Huesped> huespedes = this.getDataFromJson();
@@ -89,7 +90,7 @@ public final class PersonaDAOImpl implements PersonaDAO {
     }
 
     @Override
-    public List<Huesped> buscarHuesped(Long id, String dni, String nombre, String apellido){
+    public List<Huesped> buscarHuesped(Long id, String dni, String nombre, String apellido, String tipo_doc){
         List<Huesped> listaResultado = getDataFromJson();
 
         if(id != null){
@@ -105,93 +106,13 @@ public final class PersonaDAOImpl implements PersonaDAO {
             if(apellido != null){
                 listaResultado = listaResultado.stream().filter(p -> p.getApellido().equals(apellido)).collect(Collectors.toList());
             }
+            if(tipo_doc != null){
+                listaResultado = listaResultado.stream().filter(p -> p.getTipo_dni().equals(tipo_doc)).collect(Collectors.toList());
+            }
         }
         
         return listaResultado;
     }
-
-    // Quedan a módo histórico
-    /*
-    @Override
-    public Huesped buscarHuesped(Long id) {
-        List<Huesped> huespedes = this.getDataFromJson();
-        Huesped found = null;
-        for (Huesped h : huespedes) {
-            if(h.getId().equals(id)){
-              found = h;  
-              System.out.println("Huesped encontrado: " + h.getNombre() + " " + h.getApellido());
-              } 
-        }
-        if (found == null) {
-            System.out.println("No se encontro ningun huesped con el ID: " + id);
-            //throw new HuespedNoEncontradoException()
-        } else {
-          System.out.println(found);
-        }
-        return found;
-    }
-
-    @Override
-    public List<Huesped> buscarHuespedPorNombre(String nombre) {
-        List<Huesped> huespedes = this.getDataFromJson();
-        List<Huesped> foundList = new ArrayList<>();
-        for (Huesped h : huespedes) {
-            if(h.getNombre().equalsIgnoreCase(nombre)){
-              foundList.add(h); 
-              } 
-        }
-        if (foundList.isEmpty()) {
-            System.out.println("No se encontro ningun huesped con el nombre: " + nombre);
-        } else {
-          System.out.println("Huespedes encontrados con el nombre " + nombre + ":");
-          for (Huesped h : foundList) {
-            System.out.println(h.getId() + " " + h.getNombre() + " " + h.getApellido());
-          }
-        }
-
-        return foundList;
-    }
-
-    @Override
-    public List<Huesped> buscarHuespedPorApellido(String apellido) {
-        List<Huesped> huespedes = this.getDataFromJson();
-        List<Huesped> foundList = new ArrayList<>();
-        for (Huesped h : huespedes) {
-            if(h.getApellido().equalsIgnoreCase(apellido)){
-              foundList.add(h);  
-              } 
-        }
-        if (foundList.isEmpty()) {
-            System.out.println("No se encontro ningun huesped con el apellido: " + apellido);
-        } else {
-          System.out.println("Huespedes encontrados con el apellido " + apellido + ":");
-          for (Huesped h : foundList) {
-            System.out.println(h.getId() + " " + h.getNombre() + " " + h.getApellido());
-          }
-        }
-
-        return foundList;
-    }
-
-    @Override
-    public Huesped buscarHuespedPorDni(String dni) {
-        Huesped found = null;
-        List<Huesped> huespedes = this.getDataFromJson();
-        for (Huesped h : huespedes) {
-            if(h.getDni().equals(dni)){
-                found = h;  
-                //System.out.println("Huesped encontrado: " + h.getNombre() + " " + h.getApellido());
-                break;
-            } 
-        }
-        if (found == null) {
-            System.out.println("No se encontro ningun huesped con el DNI: " + dni);
-        } else {
-            System.out.println("Huesped encontrado: " + found.getNombre() + " " + found.getApellido());
-        }
-        return found;
-    }
-    */
 
     // File handler
     private void setDataToJson(List<Huesped> huespedes) {
