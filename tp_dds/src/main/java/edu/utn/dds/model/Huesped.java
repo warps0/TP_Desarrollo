@@ -1,14 +1,19 @@
 package edu.utn.dds.model;
 
+import java.time.LocalDate;
+
 public class Huesped extends Persona {
     private String dni;
     private String nombre;
     private String apellido;
     private String tipo_dni;
     
-    public Huesped(){};
+    public Huesped(){
+        super();
+    };
 
-    public Huesped(String dni, String nombre, String apellido, String tipo_dni, String nacionalidad) {
+    public Huesped(Long id, String dni, String nombre, String apellido, String tipo_dni, String nacionalidad, LocalDate doB, Contacto contacto) {
+        super(id, doB, contacto);
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;

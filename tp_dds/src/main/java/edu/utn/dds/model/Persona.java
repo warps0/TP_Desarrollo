@@ -1,6 +1,8 @@
 package edu.utn.dds.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public abstract class Persona {
     private Long id;
@@ -9,6 +11,14 @@ public abstract class Persona {
     private String ocupacion;
     private LocalDate doB;
     private Contacto contacto;
+    
+    public Persona(){}
+    
+    public Persona(Long id, LocalDate dob, Contacto contacto){
+        this.id = id;
+        this.doB = dob;
+        this.contacto = contacto;
+    }
     
     public Long getId() {
         return id;
@@ -46,5 +56,4 @@ public abstract class Persona {
     public void setContacto(Contacto contacto) {
         this.contacto = contacto;
     }
-    
 }
