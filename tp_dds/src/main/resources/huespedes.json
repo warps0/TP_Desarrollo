@@ -1,6 +1,6 @@
 [
   {
-    "id": 1001,
+    "id": 1,
     "pos_f_iva": "Responsable Inscripto",
     "nacionalidad": "Argentina",
     "ocupacion": "Estudiante",
@@ -16,7 +16,7 @@
     "tipo_dni": "DNI"
   },
   {
-    "id": 1002,
+    "id": 2,
     "pos_f_iva": "Consumidor Final",
     "nacionalidad": "Chilena",
     "ocupacion": "Ingeniero",
@@ -32,7 +32,7 @@
     "tipo_dni": "Pasaporte"
   },
   {
-    "id": 1003,
+    "id": 3,
     "pos_f_iva": "Exento",
     "nacionalidad": "Brasileña",
     "ocupacion": "Médico",
@@ -48,7 +48,7 @@
     "tipo_dni": "RG"
   },
   {
-    "id": 1004,
+    "id": 4,
     "pos_f_iva": "Monotributista",
     "nacionalidad": "Uruguaya",
     "ocupacion": "Diseñador",
@@ -64,7 +64,7 @@
     "tipo_dni": "Cédula"
   },
   {
-    "id": 1005,
+    "id": 5,
     "pos_f_iva": "Consumidor Final",
     "nacionalidad": "Paraguaya",
     "ocupacion": "Abogado",
@@ -80,7 +80,7 @@
     "tipo_dni": "Cédula"
   },
   {
-    "id": 1006,
+    "id": 6,
     "pos_f_iva": "Responsable Inscripto",
     "nacionalidad": "Mexicana",
     "ocupacion": "Programador",
@@ -96,7 +96,7 @@
     "tipo_dni": "Pasaporte"
   },
   {
-    "id": 1007,
+    "id": 7,
     "pos_f_iva": "Consumidor Final",
     "nacionalidad": "Peruana",
     "ocupacion": "Chef",
@@ -112,7 +112,7 @@
     "tipo_dni": "DNI"
   },
   {
-    "id": 1008,
+    "id": 8,
     "pos_f_iva": "Monotributista",
     "nacionalidad": "Colombiana",
     "ocupacion": "Vendedor",
@@ -128,7 +128,7 @@
     "tipo_dni": "Cédula"
   },
   {
-    "id": 1009,
+    "id": 9,
     "pos_f_iva": "Consumidor Final",
     "nacionalidad": "Española",
     "ocupacion": "Jubilado",
@@ -144,7 +144,7 @@
     "tipo_dni": "NIE"
   },
   {
-    "id": 1010,
+    "id": 10,
     "pos_f_iva": "Responsable Inscripto",
     "nacionalidad": "Canadiense",
     "ocupacion": "Analista",
