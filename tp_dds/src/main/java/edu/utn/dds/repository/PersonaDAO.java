@@ -11,4 +11,6 @@ public interface PersonaDAO {
     public Huesped modificarHuesped(Long id, String dni, String nombre, String apellido, String tipo_dni, String nacionalidad);
     public Huesped borrarHuesped(Long id);
     public List<Huesped> buscarHuesped(Long id, String dni, String nombre, String apellido, String tipo_doc);
+
+    public boolean sePuedeCrearHuesped(String dni, String tipo_dni);
 }

@@ -185,6 +185,9 @@ public class Main {
         catch(HuespedNoCreadoException e) {
             System.out.println(e.getMessage());
         }
+        catch(CredencialesExistentes e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void modificarHuesped() {
@@ -266,6 +269,9 @@ public class Main {
                 direccion = null;
 
             service.modificarHuesped(idHuespedAModificar, tipoDni, nombre, apellido, dni, nacionalidad, doB, telefono, email, direccion);
+        } catch(CredencialesExistentes e) {
+            System.out.println(e.getMessage());
+            System.out.println("Ingrese nuevamente TIPO y NRO de documento.");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (IdInvalidoException e) {
@@ -273,6 +279,7 @@ public class Main {
         } catch (HuespedNoEncontradoException e) {
             System.out.println(e.getMessage());
         }
+        
     }
 
     public static void borrarHuesped() {

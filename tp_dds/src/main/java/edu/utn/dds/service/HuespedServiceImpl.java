@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.utn.dds.dto.HuespedDTO;
+import edu.utn.dds.exception.CredencialesExistentes;
 import edu.utn.dds.exception.HuespedNoCreadoException;
 import edu.utn.dds.exception.HuespedNoEncontradoException;
 import edu.utn.dds.exception.IdInvalidoException;
@@ -19,33 +20,37 @@ public class HuespedServiceImpl implements HuespedService {
     private PersonaDAO repository = PersonaDAOImpl.getPersonaDAOInstance(); 
 
     @Override
-    public HuespedDTO crearHuesped(String dni, String nombre, String apellido, String tipo_dni, String nacionalidad, String doB, String telefono, String correo, String direccion) throws HuespedNoCreadoException {
+    public HuespedDTO crearHuesped(String dni, String nombre, String apellido, String tipo_dni, String nacionalidad, String doB, String telefono, String correo, String direccion) throws HuespedNoCreadoException, CredencialesExistentes {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         HuespedDTO huespedReturn = null;
     
         try{
             LocalDate trueDoB = LocalDate.parse(doB, formatter);
             Contacto trueContact = new Contacto();
+             Huesped huesped = null;
             trueContact.setTelefono(telefono);
             trueContact.setDireccion(direccion);
             trueContact.setEmail(correo);
 
-            Huesped huesped = repository.crearHuesped(dni, nombre, apellido, tipo_dni, nacionalidad, trueDoB, trueContact);
+            if(repository.sePuedeCrearHuesped(dni, tipo_dni)){
+               huesped = repository.crearHuesped(dni, nombre, apellido, tipo_dni, nacionalidad, trueDoB, trueContact);
+            }
+            else throw new CredencialesExistentes();
+                
 
             if(huesped == null) throw new HuespedNoCreadoException();
 
             huespedReturn = new HuespedDTO(dni, nombre, apellido, tipo_dni, nacionalidad, correo, trueDoB, direccion);
         }
         catch(DateTimeParseException e){
-            e.getMessage();  
-            e.getStackTrace();
+            System.out.println("Formato fecha inválida. Ingrese dd-MM-yyyy");
         }
 
         return huespedReturn;
     }
 
     @Override
-    public HuespedDTO modificarHuesped(String id, String dni, String nombre, String apellido, String tipo_dni, String nacionalidad, String doB, String telefono, String correo, String direccion) throws HuespedNoEncontradoException, IdInvalidoException {
+    public HuespedDTO modificarHuesped(String id, String dni, String nombre, String apellido, String tipo_dni, String nacionalidad, String doB, String telefono, String correo, String direccion) throws HuespedNoEncontradoException, IdInvalidoException, CredencialesExistentes {
         Long trueID = null;
         Huesped huesped = null;
         HuespedDTO huespedReturn = null;
@@ -58,8 +63,11 @@ public class HuespedServiceImpl implements HuespedService {
 
             if(trueID <= 0) throw new IdInvalidoException("El ID debe ser mayor a 0.");
 
-            huesped = repository.modificarHuesped(trueID, dni, nombre, apellido, tipo_dni, nacionalidad);
-            // VERIFICAR QUE NO EXISTAN 2 HUESPEDES CON EL MISMO Y TIPO DNI
+            if(repository.sePuedeCrearHuesped(dni, tipo_dni)){
+               huesped = repository.modificarHuesped(trueID, dni, nombre, apellido, tipo_dni, nacionalidad);
+            }
+            else throw new CredencialesExistentes();
+
             if(huesped == null) throw new HuespedNoEncontradoException();
             else {
                 huespedReturn = new HuespedDTO(dni, nombre, apellido, tipo_dni, nacionalidad, correo, huesped.getDoB(), direccion);
@@ -106,7 +114,7 @@ public class HuespedServiceImpl implements HuespedService {
 
             List<Huesped> huespedes = repository.buscarHuesped(trueID, dni, nombre, apellido, tipo_doc);
 
-            if(huespedes == null) throw new HuespedNoEncontradoException();
+            if(huespedes.size() == 0) throw new HuespedNoEncontradoException();
 
             for(Huesped huesped : huespedes) {
                 huespedReturn.add(

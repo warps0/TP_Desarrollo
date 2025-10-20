@@ -117,6 +117,20 @@ public final class PersonaDAOImpl implements PersonaDAO {
         return listaResultado;
     }
 
+    public boolean sePuedeCrearHuesped(String dni, String tipo_dni) {
+        boolean huespedValido = true;
+        List<Huesped> huespedes = getDataFromJson();
+
+        for(Huesped h : huespedes) {
+            if(h.getDni().equals(dni) && h.getTipo_dni().equals(tipo_dni)){
+                huespedValido = false;
+                break;
+            }
+        }
+
+        return huespedValido;
+    }
+
     // File handler
     private void setDataToJson(List<Huesped> huespedes) {
         try {
