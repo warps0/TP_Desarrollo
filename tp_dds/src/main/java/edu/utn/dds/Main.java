@@ -49,6 +49,7 @@ public class Main {
 
     public static void menu() {
         String op = null;
+        int opcion = 0;
         do {
             System.out.println("MENU:");
             System.out.println("1 - Buscar Huésped");
@@ -59,10 +60,13 @@ public class Main {
             System.out.println("Ingrese una opción:");
             try {
                 op = in.readLine();
+                opcion = Integer.parseInt(op);
             } catch (IOException e) {
-                e.getStackTrace();
+                System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("Opcion invalida");
+                opcion = 6;
             }
-            int opcion = Integer.parseInt(op);
             switch (opcion) {
                 case 1:
                     menuBusqueda();
@@ -79,7 +83,7 @@ public class Main {
                 default:
                     break;
             }
-        } while (!op.equals(5));
+        } while (!op.equals("5"));
     }
 
     public static void menuBusqueda() {
@@ -119,13 +123,13 @@ public class Main {
 
             huespedes = service.buscarHuesped(id, dni, nombre, apellido, apellido);
         }catch(IOException e){
-            e.getStackTrace();
+            System.out.println(e.getMessage());
         }catch(HuespedNoEncontradoException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
             crearHuesped();
         }
         catch(IdInvalidoException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
 
         if(huespedes != null) {
@@ -176,10 +180,10 @@ public class Main {
 
             service.crearHuesped(dni, nombre, apellido, tipoDni, nacionalidad, doB, telefono, email, direccion);
         }catch(IOException e) {
-            e.getStackTrace();
+            System.out.println(e.getMessage());
         }
         catch(HuespedNoCreadoException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -222,9 +226,9 @@ public class Main {
 
             System.out.println("Dejar vacío y presionar Enter para mantener el valor actual.");
             System.out.println("Nuevo tipo de DNI:");
-
-            System.out.println("DNI:");
             tipoDni = in.readLine();
+            System.out.println("DNI:");
+            dni = in.readLine();
             System.out.println("Nombre:");
             nombre = in.readLine();
             System.out.println("Apellido:");
@@ -263,11 +267,11 @@ public class Main {
 
             service.modificarHuesped(idHuespedAModificar, tipoDni, nombre, apellido, dni, nacionalidad, doB, telefono, email, direccion);
         } catch (IOException e) {
-            e.getStackTrace();
+            System.out.println(e.getMessage());
         } catch (IdInvalidoException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         } catch (HuespedNoEncontradoException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -306,11 +310,11 @@ public class Main {
             service.borrarHuesped(idHuespedABorrar);
 
         } catch (IOException e) {
-            e.getStackTrace();
+            System.out.println(e.getMessage());
         } catch (IdInvalidoException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         } catch (HuespedNoEncontradoException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 }

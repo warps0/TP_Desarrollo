@@ -51,7 +51,10 @@ public class HuespedServiceImpl implements HuespedService {
         HuespedDTO huespedReturn = null;
         
         try{
-            trueID = Long.parseLong(id);
+            if(id != null && id != "")
+                trueID = Long.parseLong(id);
+            else
+                trueID = null;
 
             if(trueID <= 0) throw new IdInvalidoException("El ID debe ser mayor a 0.");
 
@@ -75,7 +78,10 @@ public class HuespedServiceImpl implements HuespedService {
         Huesped huesped = null;
 
         try {
-            trueID = Long.parseLong(id);
+            if(id != null && id != "")
+                trueID = Long.parseLong(id);
+            else
+                trueID = null;
 
             if(trueID <= 0) throw new IdInvalidoException("El ID debe ser mayor a 0.");
             
@@ -93,7 +99,10 @@ public class HuespedServiceImpl implements HuespedService {
         List<HuespedDTO> huespedReturn = new ArrayList<>();
 
         try {
-            trueID = Long.parseLong(id);
+            if(id != null && id != "")
+                trueID = Long.parseLong(id);
+            else
+                trueID = null;
 
             List<Huesped> huespedes = repository.buscarHuesped(trueID, dni, nombre, apellido, tipo_doc);
 
@@ -101,10 +110,19 @@ public class HuespedServiceImpl implements HuespedService {
 
             for(Huesped huesped : huespedes) {
                 huespedReturn.add(
-                    new HuespedDTO(dni, nombre, apellido, tipo_doc, id, apellido, huesped.getDoB(), tipo_doc)
+                    new HuespedDTO(
+                        huesped.getDni(), 
+                        huesped.getNombre(), 
+                        huesped.getApellido(), 
+                        huesped.getTipo_dni(), 
+                        huesped.getNacionalidad(), 
+                        huesped.getOcupacion(), 
+                        huesped.getDoB(), 
+                        huesped.getPos_f_iva()
+                    )
                 );
             }
-            
+
         } catch(NumberFormatException e){
             throw new IdInvalidoException("El ID debe ser un número.");
         } 

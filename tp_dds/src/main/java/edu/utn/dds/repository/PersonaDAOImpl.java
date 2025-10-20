@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -42,6 +43,8 @@ public final class PersonaDAOImpl implements PersonaDAO {
     public Huesped crearHuesped(String dni, String nombre, String apellido, String tipo_dni, String nacionalidad, LocalDate doB, Contacto contacto) {
         List<Huesped> listaHuespedes = this.getDataFromJson();
 
+        Collections.sort(listaHuespedes, (h1, h2) -> h1.getId().compareTo(h2.getId()));
+
         Long newId = listaHuespedes.getLast().getId() + 1;
 
         Huesped huesped = new Huesped(newId, dni, nombre, apellido, tipo_dni, nacionalidad, doB, contacto);
@@ -79,7 +82,7 @@ public final class PersonaDAOImpl implements PersonaDAO {
         
         if(huesped != null) {
             List<Huesped> huespedes = this.getDataFromJson();
-            huespedes.remove(huesped);
+            huespedes.removeIf(h -> h.getId().equals(id));
             this.setDataToJson(huespedes);
         }
 
@@ -129,7 +132,7 @@ public final class PersonaDAOImpl implements PersonaDAO {
         List<Huesped> huespedes = new ArrayList<>();
 
         try{
-            mapper.readValue(jsonFile, new TypeReference<List<Huesped>>(){});
+            huespedes = mapper.readValue(jsonFile, new TypeReference<List<Huesped>>(){});
         }
         catch(IOException e){
             e.printStackTrace();
